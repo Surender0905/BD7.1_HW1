@@ -1,25 +1,19 @@
 const mongoose = require("mongoose");
 
-const restaurantSchema = new mongoose.Schema(
+const hotelSchema = new mongoose.Schema(
     {
         name: {
             type: String,
             required: true,
         },
-        cuisine: {
+        category: {
             type: [String],
             enum: [
-                "American",
-                "Italian",
-                "Chinese",
-                "Indian",
-                "Japanese",
-                "Mexican",
-                "Thai",
-                "French",
-                "Mediterranean",
-                "Greek",
-                "Spanish",
+                "Budget",
+                "Mid-Range",
+                "Luxury",
+                "Boutique",
+                "Resort",
                 "Other",
             ],
             required: true,
@@ -41,32 +35,52 @@ const restaurantSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        openHours: {
+        checkInTime: {
             type: String,
+            required: true,
+        },
+        checkOutTime: {
+            type: String,
+            required: true,
+        },
+        amenities: {
+            type: [String],
         },
         priceRange: {
             type: String,
-            enum: ["$", "$$", "$$$", "$$$$", "Other"],
+            enum: ["$$ (11-30)", "$$$ (31-60)", "$$$$ (61+)", "Other"],
         },
         reservationsNeeded: {
             type: Boolean,
             default: false,
         },
-        isDeliveryAvailable: {
+        isParkingAvailable: {
             type: Boolean,
             default: false,
         },
-        menuUrl: {
-            type: String,
-            required: true,
+        isWifiAvailable: {
+            type: Boolean,
+            default: false,
+        },
+        isPoolAvailable: {
+            type: Boolean,
+            default: false,
+        },
+        isSpaAvailable: {
+            type: Boolean,
+            default: false,
+        },
+        isRestaurantAvailable: {
+            type: Boolean,
+            default: false,
         },
         photos: {
             type: [String],
         },
     },
     { timestamps: true },
-); // Automatically tracks creation and update times
+);
 
-const Restaurant = mongoose.model("Restaurant", restaurantSchema);
+const Hotel = mongoose.model("Hotel", hotelSchema);
 
-module.exports = Restaurant;
+module.exports = Hotel;
